@@ -1,4 +1,4 @@
-# Marketing Analytics
+# Marketing Analysis
 
 # 1. Project Overview
 
@@ -53,11 +53,11 @@ These metrics allow evaluation of campaign efficiency and channel performance.
 
 # 5. Project Structure
 
-marketing-analytics/
+marketing-analysis/
 ├── .env
-├── config.py
 ├── main.py
 ├── requirements.txt
+├── marketing_analysis.ipynb
 │
 ├── data/
 │   ├── ads_facebook.csv
@@ -74,42 +74,54 @@ marketing-analytics/
 │   ├── create views.sql
 │
 ├── src/
+│   ├── __init__.py
 │   ├── data_loader.py
-│   ├── data_transformation.py
-│   ├── metrics.py
 │   ├── export_csv.py
 │   ├── export_sql.py
-│   └── export_to_files.py
-│
-└── notebooks/
-    └── marketing_analysis.ipynb
+│   ├── metrics.py
 
-# 6. How to Run the Project
+# 6. Power BI Dashboard
 
-## 6.1 Create Environment
+A Power BI dashboard has been created to visualize marketing performance data.
+
+The dashboard is based on the exported data and SQL views (v_ChannelPerformance, v_TopCampaigns).
+
+It provides interactive charts and tables for:
+
+- Campaign performance per channel
+- ROI, CTR, CPC, CPA metrics
+- Top performing campaigns
+
+Note: The .pbix file is not included in this repository. Use the exported CSV files or SQL views to explore the dashboard in Power BI Desktop.
+
+This allows stakeholders to interactively analyze marketing campaigns without including the raw Power BI project file.
+
+# 7. How to Run the Project
+
+## 7.1 Create Environment
 python -m venv venv
 Activate the environment.
 
-## 6.2 Install Dependencies
+## 7.2 Install Dependencies
 pip install -r requirements.txt
 
-## 6.3 Configure Environment Variables
+## 7.3 Configure Environment Variables
 Create a .env file with database connection details:
 
 DB_SERVER=YOUR_SERVER
 DB_NAME=MarketingData
 
-## 6.4 Create db and views in SQL Server
+## 7.4 Create db and views in SQL Server
 
 In sql/ folder you can find two scripts:
 
--- Create db and tables
+Create db and tables:
 sql/create DB.sql
 
--- Create views
+Create views:
 sql/create views.sql
 
-## 6.5 Run the Pipeline
+## 7.5 Run the Pipeline
 python main.py
 
 The script will:
@@ -119,7 +131,7 @@ The script will:
 - export results to CSV
 - insert records into SQL Server
 
-# 7. Analytical Notebook
+# 8. Analytical Notebook
 
 The directory contains:
 marketing_analysis.ipynb
@@ -130,8 +142,9 @@ The notebook includes:
 - correlation analysis
 - preparation for Power BI dashboards
 
-# 8. Technology Stack
+# 9. Technology Stack
 
+Power BI
 Python
 pandas
 numpy
@@ -141,5 +154,5 @@ seaborn
 python-dotenv
 Jupyter Notebook
 
-# 9. License
+# 10. License
 MIT License

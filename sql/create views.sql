@@ -22,6 +22,3 @@ SELECT
 	AVG(ROI) AS Avg_ROI
 FROM CampaignData
 GROUP BY campaign_id, channel;
-
-
-
