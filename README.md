@@ -1,24 +1,59 @@
-# Marketing Analytics Project
+# Marketing Analytics
 
-This project presents a complete mini analytical pipeline that integrates marketing data from three sources:
+# 1. Project Overview
 
-Facebook Ads
-Google Ads
-CRM (revenue data)
+This project demonstrates a complete marketing analytics pipeline in Python that integrates data from multiple marketing platforms and a CRM system.
 
-The goals of the project are:
+The pipeline performs data extraction, transformation, metric calculation, and exports results for further analysis in SQL Server, Power BI, and Jupyter Notebook.
 
-merging all sources into one unified dataset
-calculating core marketing metrics (CTR, CPC, CPA, ROI)
-exporting results to:
-a CSV file
-a SQL Server database
-performing additional analysis in Power BI and Jupyter Notebook
+The project follows a simplified ETL workflow:
 
-# 1. Project Structure
+Extract → Transform → Analyze → Export
 
+# 2. Project Goals
 
-stock-analysis/
+The project aims to:
+- Integrate marketing data from multiple sources
+- Create a unified dataset combining advertising and revenue data
+- Calculate core marketing performance metrics
+- Export processed data to analytical formats
+- Enable further analysis in SQL Server, Power BI, and Jupyter Notebook
+
+# 3. Data Sources
+
+The project integrates data from three sources:
+
+- Facebook Ads
+    - impressions
+    - clicks
+    - cost
+
+- Google Ads
+    - impressions
+    - clicks
+    - cost
+
+- CRM System
+    - conversions
+    - revenue
+
+All sources are merged into a single analytical dataset.
+
+# 4. Marketing Metrics Calculated
+
+The following performance metrics are computed:
+
+CTR = clicks / impressions
+CPC = cost / clicks
+CPA = cost / conversions
+Conversion Rate = conversions / clicks
+ROI = (revenue − cost) / cost
+
+These metrics allow evaluation of campaign efficiency and channel performance.
+
+# 5. Project Structure
+
+marketing-analytics/
 ├── .env
 ├── config.py
 ├── main.py
@@ -31,70 +66,80 @@ stock-analysis/
 │
 ├── output/
 │
-└── src/
-    ├── data_loader.py
-    ├── data_transformation.py
-    ├── export_to_files.py
-    ├── export_csv.py
-    ├── export_sql.py
-    └── metrics.py
+├── powerbi/
+│   ├── dashboards.pdf
+│
+├── sql/
+│   ├── create DB.sql
+│   ├── create views.sql
+│
+├── src/
+│   ├── data_loader.py
+│   ├── data_transformation.py
+│   ├── metrics.py
+│   ├── export_csv.py
+│   ├── export_sql.py
+│   └── export_to_files.py
+│
+└── notebooks/
+    └── marketing_analysis.ipynb
 
-# 2. How to Run the Project
+# 6. How to Run the Project
 
-## 2.1. Create environment
+## 6.1 Create Environment
+python -m venv venv
+Activate the environment.
 
-## 2.2. Installation
-
+## 6.2 Install Dependencies
 pip install -r requirements.txt
 
-## 2.3. Configure .env
-
-Create a .env file and provide database connection details:
+## 6.3 Configure Environment Variables
+Create a .env file with database connection details:
 
 DB_SERVER=YOUR_SERVER
 DB_NAME=MarketingData
 
-## 2.4. Running the Project
+## 6.4 Create db and views in SQL Server
 
+In sql/ folder you can find two scripts:
+
+-- Create db and tables
+sql/create DB.sql
+
+-- Create views
+sql/create views.sql
+
+## 6.5 Run the Pipeline
 python main.py
 
 The script will:
+- load marketing data from CSV files
+- merge datasets
+- calculate marketing metrics
+- export results to CSV
+- insert records into SQL Server
 
-load and merge data from all sources
-calculate marketing performance metrics
-export processed data to a CSV file inside the output/ directory
-insert new records into SQL Server
+# 7. Analytical Notebook
 
-# 3. Marketing Metrics Calculated
-CTR = clicks / impressions
-CPC = cost / clicks
-CPA = cost / conversions
-Conversion Rate = conversions / clicks
-ROI = (revenue – cost) / cost
-
-# 4. SQL – Database Structure
-
-The project includes a SQL script that creates:
-
-the CampaignData table
-two analytical views:
-v_ChannelPerformance
-v_TopCampaigns
-These views help analyze performance per channel and per campaign.
-
-# 5. Analytical Notebook
-
-In the notebooks/ directory, you will find:
-
+The directory contains:
 marketing_analysis.ipynb
 
-It contains:
+The notebook includes:
+- exploratory data analysis (EDA)
+- marketing performance visualizations
+- correlation analysis
+- preparation for Power BI dashboards
 
-exploratory data analysis (EDA)
-charts showing performance metrics
-correlation analysis
-a foundation for building Power BI dashboards
+# 8. Technology Stack
 
-# 6. License
+Python
+pandas
+numpy
+SQL Server
+matplotlib
+seaborn
+python-dotenv
+Jupyter Notebook
 
-MIT
+# 9. License
+MIT License
